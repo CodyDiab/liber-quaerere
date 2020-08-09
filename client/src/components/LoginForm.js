@@ -39,8 +39,8 @@ const LoginForm = () => {
       // const { token, user } = await response.json();
       // console.log(user);
       Auth.login(data.login.token);
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       setShowAlert(true);
     }
 
@@ -89,6 +89,7 @@ const LoginForm = () => {
           Submit
         </Button>
       </Form>
+      {error && <div>Sign up failed</div>}
     </>
   );
 };
