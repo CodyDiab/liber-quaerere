@@ -39,25 +39,25 @@ Mutation: {
     const token = signToken(user);
     return {token, user};
  },
- saveBook: async (parent, {user,body}, context) => {
+ saveBook: async (parent, {input}, context) => {
      if(context.user) {
-         const updatedBooks = await User.findOneAndUpdate(
+         const updatedUser = await User.findOneAndUpdate(
             { _id: user._id },
-            { $addToSet: { savedBooks: body } },
+            { $addToSet: { savedBooks: input } },
             { new: true, runValidators: true }
          );
-         return updatedBooks;
+         return updatedUser;
      }
      throw new AuthenticationError('You need to be logged in!');
  },
- deleteBook: async (parent,{user, params}, context) => {
+ deleteBook: async (parent,args, context) => {
      if(context.user) {
-      const updatedBooks = await User.findOneAndUpdate(
+      const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
-        { $pull: { savedBooks: { bookId: params.bookId } } },
+        { $pull: { savedBooks: { bookId: args.bookId } } },
         { new: true }
       );
-      return updatedBooks;
+      return updatedUser;
      }
      throw new AuthenticationError('You need to be logged in!');
  }
