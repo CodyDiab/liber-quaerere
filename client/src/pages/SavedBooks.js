@@ -11,8 +11,9 @@ const SavedBooks = () => {
   const [userData, setUserData] = useState({});
 
   // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
-  const [deleteBook, {error}] = useMutation(deleteBook);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
+  const { loading, data } = useQuery(GET_ME);
+  const userData = data?.me || {};
   // useEffect(() => {
   //   const getUserData = async () => {
   //     try {
@@ -47,13 +48,14 @@ const SavedBooks = () => {
     }
 
     try {
-      await deleteBook({
-        variables: {bookId, token} 
-      
+      const { data } = await removeBook({
+        variables: { bookId }
       });
-    
-      //  const updatedUser = await response.json();
-      // setUserData(updatedUser);
+
+      if (error) {
+        throw new Error('something went wrong!');
+      }
+
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
