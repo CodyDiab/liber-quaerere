@@ -1,7 +1,7 @@
 
   # Book Search Refactor
   
-![Link to deployed App](https://pure-retreat-84316.herokuapp.com/)
+[Link to deployed App](https://pure-retreat-84316.herokuapp.com/)
 
   This is a refactor of a book serach aplication built with Google Books API, it has been refactored to use an Apollo server along with Graphql data base queries and mutations 
   
